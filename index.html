@@ -1,321 +1,314 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2870
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww25400\viewh16060\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng Dụng Chấm Điểm Phát Âm Tiếng Trung</title>
+    <style>
+        :root {
+            --primary-color: #de2910; /* Màu đỏ cờ Trung Quốc */
+            --secondary-color: #ffde00; /* Màu vàng */
+            --bg-color: #fff8f7;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+        }
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="zh-CN">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>\uc0\u7912 ng D\u7909 ng Ch\u7845 m \u272 i\u7875 m Ph\'e1t \'c2m Ti\u7871 ng Trung</title>\
-    <style>\
-        :root \{\
-            --primary-color: #de2910; /* M\'e0u \uc0\u273 \u7887  c\u7901  Trung Qu\u7889 c */\
-            --secondary-color: #ffde00; /* M\'e0u v\'e0ng */\
-            --bg-color: #fff8f7;\
-            --card-bg: #ffffff;\
-            --text-color: #2c3e50;\
-        \}\
-\
-        body \{\
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;\
-            background-color: var(--bg-color);\
-            color: var(--text-color);\
-            margin: 0;\
-            padding: 20px;\
-            display: flex;\
-            justify-content: center;\
-            align-items: center;\
-            min-height: 100vh;\
-        \}\
-\
-        .container \{\
-            background-color: var(--card-bg);\
-            padding: 30px;\
-            border-radius: 20px;\
-            box-shadow: 0 10px 30px rgba(222, 41, 16, 0.1);\
-            width: 100%;\
-            max-width: 600px;\
-            text-align: center;\
-        \}\
-\
-        h1 \{\
-            color: var(--primary-color);\
-            margin-bottom: 5px;\
-            font-size: 26px;\
-        \}\
-\
-        p.subtitle \{\
-            color: #7f8c8d;\
-            margin-bottom: 25px;\
-            font-size: 14px;\
-        \}\
-\
-        .vocab-box \{\
-            background-color: #fdfefe;\
-            padding: 25px;\
-            border-radius: 16px;\
-            border: 2px solid #fadbd8;\
-            margin-bottom: 20px;\
-        \}\
-\
-        .word-target \{\
-            font-size: 48px;\
-            font-weight: bold;\
-            color: #2c3e50;\
-            margin: 0;\
-        \}\
-\
-        .word-pinyin \{\
-            font-size: 20px;\
-            color: var(--primary-color);\
-            font-weight: 500;\
-            margin: 5px 0 10px 0;\
-        \}\
-\
-        .word-meaning \{\
-            font-size: 16px;\
-            color: #7f8c8d;\
-            margin: 0 0 20px 0;\
-        \}\
-\
-        .nav-buttons \{\
-            display: flex;\
-            justify-content: space-between;\
-            margin-top: 15px;\
-        \}\
-\
-        button \{\
-            background-color: var(--primary-color);\
-            color: white;\
-            border: none;\
-            padding: 12px 24px;\
-            font-size: 16px;\
-            border-radius: 8px;\
-            cursor: pointer;\
-            transition: all 0.3s ease;\
-            font-weight: 600;\
-        \}\
-\
-        button:hover \{\
-            opacity: 0.9;\
-            transform: translateY(-1px);\
-        \}\
-\
-        button:disabled \{\
-            background-color: #bdc3c7;\
-            cursor: not-allowed;\
-            transform: none;\
-        \}\
-\
-        .btn-audio \{\
-            background-color: #2980b9;\
-            margin-bottom: 10px;\
-        \}\
-\
-        .btn-mic \{\
-            background-color: var(--primary-color);\
-            width: 100%;\
-            margin: 15px 0;\
-            padding: 15px;\
-            font-size: 18px;\
-            border-radius: 50px;\
-            box-shadow: 0 4px 15px rgba(222, 41, 16, 0.3);\
-        \}\
-        \
-        .btn-mic.recording \{\
-            animation: pulse 1.5s infinite;\
-            background-color: #f39c12;\
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);\
-        \}\
-\
-        @keyframes pulse \{\
-            0% \{ transform: scale(1); \}\
-            50% \{ transform: scale(1.02); \}\
-            100% \{ transform: scale(1); \}\
-        \}\
-\
-        .result-box \{\
-            margin-top: 25px;\
-            padding: 15px;\
-            border-radius: 12px;\
-            display: none;\
-        \}\
-\
-        .score \{\
-            font-size: 26px;\
-            font-weight: bold;\
-            margin-bottom: 5px;\
-        \}\
-\
-        .transcript \{\
-            font-size: 16px;\
-        \}\
-\
-        .success \{ background-color: #e8f8f5; color: #117a65; border: 1px solid #a3e4d7; \}\
-        .warning \{ background-color: #fef9e7; color: #b57914; border: 1px solid #f9e79f; \}\
-        .danger \{ background-color: #f9ebea; color: #922b21; border: 1px solid #f2d4d7; \}\
-    </style>\
-</head>\
-<body>\
-\
-<div class="container">\
-    <h1>H\uc0\u7885 c Ph\'e1t \'c2m Ti\u7871 ng Trung</h1>\
-    <p class="subtitle">Gi\uc0\u7885 ng Ph\u7893  Th\'f4ng Chu\u7849 n Gi\u7843 n Th\u7875  (Putonghua)</p>\
-\
-    <div class="vocab-box">\
-        <p class="word-target" id="wordTarget">\uc0\u20320 \u22909 </p>\
-        <p class="word-pinyin" id="wordPinyin">n\uc0\u464  h\u462 o</p>\
-        <p class="word-meaning" id="wordMeaning">Xin ch\'e0o</p>\
-        \
-        <button class="btn-audio" onclick="playStandardAudio()">\uc0\u55357 \u56586  Nghe ph\'e1t \'e2m m\u7851 u</button>\
-        \
-        <div class="nav-buttons">\
-            <button id="btnPrev" onclick="changeWord(-1)">\uc0\u9664  T\u7915  tr\u432 \u7899 c</button>\
-            <button id="btnNext" onclick="changeWord(1)">T\uc0\u7915  sau \u9654 </button>\
-        </div>\
-    </div>\
-\
-    <button id="btnMic" class="btn-mic" onclick="toggleRecognition()">\uc0\u55356 \u57252  Nh\u7845 n \u273 \u7875  \u273 \u7885 c</button>\
-\
-    <div id="resultBox" class="result-box">\
-        <div class="score" id="scoreText">0%</div>\
-        <div class="transcript" id="transcriptText">H\uc0\u7879  th\u7889 ng nghe \u273 \u432 \u7907 c: ...</div>\
-    </div>\
-</div>\
-\
-<script>\
-    // Danh s\'e1ch t\uc0\u7915  v\u7921 ng ti\u7871 ng Trung giao ti\u7871 p \u273 \u417 n gi\u7843 n k\'e8m Pinyin\
-    const chineseVocab = [\
-        \{ word: "\uc0\u20320 \u22909 ", pinyin: "n\u464  h\u462 o", meaning: "Xin ch\'e0o" \},\
-        \{ word: "\uc0\u35874 \u35874 ", pinyin: "xi\'e8xie", meaning: "C\u7843 m \u417 n" \},\
-        \{ word: "\uc0\u20877 \u35265 ", pinyin: "z\'e0iji\'e0n", meaning: "T\u7841 m bi\u7879 t" \},\
-        \{ word: "\uc0\u32769 \u24072 ", pinyin: "l\u462 osh\u299 ", meaning: "Th\u7847 y c\'f4 gi\'e1o" \},\
-        \{ word: "\uc0\u23398 \u29983 ", pinyin: "xu\'e9sheng", meaning: "H\u7885 c sinh" \},\
-        \{ word: "\uc0\u20013 \u22269 ", pinyin: "Zh\u333 nggu\'f3", meaning: "Trung Qu\u7889 c" \},\
-        \{ word: "\uc0\u21916 \u27426 ", pinyin: "x\u464 huan", meaning: "Th\'edch" \},\
-        \{ word: "\uc0\u21917 \u27700 ", pinyin: "h\u275  shu\u464 ", meaning: "U\u7889 ng n\u432 \u7899 c" \},\
-        \{ word: "\uc0\u21507 \u39277 ", pinyin: "ch\u299  f\'e0n", meaning: "\u258 n c\u417 m" \},\
-        \{ word: "\uc0\u39640 \u20852 ", pinyin: "g\u257 ox\'ecng", meaning: "Vui v\u7867 " \}\
-    ];\
-\
-    let currentIndex = 0;\
-    let recognition;\
-    let isRecording = false;\
-\
-    // Kh\uc0\u7903 i t\u7841 o hi\u7875 n th\u7883  t\u7915  \u273 \u7847 u ti\'ean\
-    updateWordDisplay();\
-\
-    // Thi\uc0\u7871 t l\u7853 p Web Speech API nh\u7853 n di\u7879 n ti\u7871 ng Trung\
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) \{\
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;\
-        recognition = new SpeechRecognition();\
-        \
-        // \uc0\u272 \u7863 t ng\'f4n ng\u7919  l\'e0 Ti\u7871 ng Trung Ph\u7893  Th\'f4ng \u272 \u7841 i L\u7909 c (zh-CN)\
-        recognition.lang = 'zh-CN'; \
-        recognition.interimResults = false;\
-        recognition.maxAlternatives = 1;\
-\
-        recognition.onstart = () => \{\
-            isRecording = true;\
-            const btnMic = document.getElementById('btnMic');\
-            btnMic.textContent = "\uc0\u55357 \u57041  \u272 ang l\u7855 ng nghe... H\'e3y n\'f3i!";\
-            btnMic.classList.add('recording');\
-            document.getElementById('resultBox').style.display = 'none';\
-        \};\
-\
-        recognition.onresult = (event) => \{\
-            const resultText = event.results[0][0].transcript;\
-            const confidence = event.results[0][0].confidence; // \uc0\u272 \u7897  ch\'ednh x\'e1c \u432 \u7899 c t\'ednh t\u7915  Google\
-            \
-            evaluatePronunciation(resultText, confidence);\
-        \};\
-\
-        recognition.onend = () => \{\
-            isRecording = false;\
-            const btnMic = document.getElementById('btnMic');\
-            btnMic.textContent = "\uc0\u55356 \u57252  Nh\u7845 n \u273 \u7875  \u273 \u7885 c";\
-            btnMic.classList.remove('recording');\
-        \};\
-\
-        recognition.onerror = (event) => \{\
-            console.error(event.error);\
-            alert("L\uc0\u7895 i nh\u7853 n di\u7879 n. B\u7841 n h\'e3y ch\u7855 c ch\u7855 n \u273 \'e3 c\u7845 p quy\u7873 n Micro cho tr\'ecnh duy\u7879 t nh\'e9!");\
-        \};\
-    \} else \{\
-        alert("Tr\'ecnh duy\uc0\u7879 t n\'e0y kh\'f4ng h\u7895  tr\u7907  Web Speech API. Vui l\'f2ng ch\u7841 y \u7913 ng d\u7909 ng tr\'ean Google Chrome.");\
-    \}\
-\
-    // H\'e0m c\uc0\u7853 p nh\u7853 t t\u7915  v\u7921 ng l\'ean giao di\u7879 n\
-    function updateWordDisplay() \{\
-        document.getElementById('wordTarget').textContent = chineseVocab[currentIndex].word;\
-        document.getElementById('wordPinyin').textContent = chineseVocab[currentIndex].pinyin;\
-        document.getElementById('wordMeaning').textContent = chineseVocab[currentIndex].meaning;\
-        document.getElementById('resultBox').style.display = 'none';\
-        \
-        document.getElementById('btnPrev').disabled = currentIndex === 0;\
-        document.getElementById('btnNext').disabled = currentIndex === chineseVocab.length - 1;\
-    \}\
-\
-    function changeWord(direction) \{\
-        currentIndex += direction;\
-        if (currentIndex >= 0 && currentIndex < chineseVocab.length) \{\
-            updateWordDisplay();\
-        \}\
-    \}\
-\
-    // H\'e0m \uc0\u273 \u7885 c m\u7851 u (S\u7917  d\u7909 ng Text-to-Speech gi\u7885 ng zh-CN)\
-    function playStandardAudio() \{\
-        const targetWord = chineseVocab[currentIndex].word;\
-        const utterance = new SpeechSynthesisUtterance(targetWord);\
-        utterance.lang = 'zh-CN'; \
-        window.speechSynthesis.speak(utterance);\
-    \}\
-\
-    function toggleRecognition() \{\
-        if (isRecording) \{\
-            recognition.stop();\
-        \} else \{\
-            recognition.start();\
-        \}\
-    \}\
-\
-    // Thu\uc0\u7853 t to\'e1n so s\'e1nh ch\u7919  H\'e1n v\'e0 ch\u7845 m \u273 i\u7875 m\
-    function evaluatePronunciation(spokenText, googleConfidence) \{\
-        // Lo\uc0\u7841 i b\u7887  d\u7845 u c\'e2u n\u7871 u c\'f3 \u273 \u7875  so s\'e1nh ch\'ednh x\'e1c ch\u7919  H\'e1n\
-        const targetWord = chineseVocab[currentIndex].word.replace(/[.,\\/#!$%\\^&\\*;:\{\}=\\-_`~()\uc0\u65311 \u12290 \u65292 \u65281 ]/g,"").trim();\
-        const processedSpoken = spokenText.replace(/[.,\\/#!$%\\^&\\*;:\{\}=\\-_`~()\uc0\u65311 \u12290 \u65292 \u65281 ]/g,"").trim();\
-\
-        const resultBox = document.getElementById('resultBox');\
-        const scoreText = document.getElementById('scoreText');\
-        const transcriptText = document.getElementById('transcriptText');\
-\
-        transcriptText.textContent = `B\uc0\u7841 n \u273 \'e3 \u273 \u7885 c: "$\{spokenText\}"`;\
-        resultBox.style.display = 'block';\
-\
-        // 1. N\uc0\u7871 u kh\u7899 p ch\'ednh x\'e1c ch\u7919  H\'e1n m\u7909 c ti\'eau\
-        if (processedSpoken === targetWord) \{\
-            let finalScore = Math.round(googleConfidence * 100);\
-            if (finalScore < 85) finalScore = 90; // B\'f9 \uc0\u273 i\u7875 m s\'e0n cho h\u7885 c sinh khi nh\u7853 n di\u7879 n \u273 \'fang t\u7915 \
-\
-            scoreText.textContent = `\uc0\u22826 \u26834 /Tuy\u7879 t v\u7901 i! $\{finalScore\}%`;\
-            resultBox.className = "result-box success";\
-        \} \
-        // 2. N\uc0\u7871 u trong c\'e2u h\u7885 c sinh \u273 \u7885 c c\'f3 ch\u7913 a t\u7915  m\u7909 c ti\'eau\
-        else if (processedSpoken.includes(targetWord)) \{\
-            scoreText.textContent = `\uc0\u24456 \u22909 /R\u7845 t t\u7889 t! 75%`;\
-            resultBox.className = "result-box warning";\
-        \} \
-        // 3. N\uc0\u7871 u h\u7879  th\u7889 ng nh\u7853 n di\u7879 n ra t\u7915  ho\'e0n to\'e0n kh\'e1c (sai \'e2m ho\u7863 c sai thanh \u273 i\u7879 u)\
-        else \{\
-            scoreText.textContent = `\uc0\u19981 \u23545 /Ch\u432 a \u273 \'fang! 30%`;\
-            resultBox.className = "result-box danger";\
-        \}\
-    \}\
-</script>\
-\
-</body>\
-</html>}
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(222, 41, 16, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 26px;
+        }
+
+        p.subtitle {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .vocab-box {
+            background-color: #fdfefe;
+            padding: 25px;
+            border-radius: 16px;
+            border: 2px solid #fadbd8;
+            margin-bottom: 20px;
+        }
+
+        .word-target {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .word-pinyin {
+            font-size: 20px;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin: 5px 0 10px 0;
+        }
+
+        .word-meaning {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin: 0 0 20px 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-audio {
+            background-color: #2980b9;
+            margin-bottom: 10px;
+        }
+
+        .btn-mic {
+            background-color: var(--primary-color);
+            width: 100%;
+            margin: 15px 0;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(222, 41, 16, 0.3);
+        }
+        
+        .btn-mic.recording {
+            animation: pulse 1.5s infinite;
+            background-color: #f39c12;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .score {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .transcript {
+            font-size: 16px;
+        }
+
+        .success { background-color: #e8f8f5; color: #117a65; border: 1px solid #a3e4d7; }
+        .warning { background-color: #fef9e7; color: #b57914; border: 1px solid #f9e79f; }
+        .danger { background-color: #f9ebea; color: #922b21; border: 1px solid #f2d4d7; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Học Phát Âm Tiếng Trung</h1>
+    <p class="subtitle">Giọng Phổ Thông Chuẩn Giản Thể (Putonghua)</p>
+
+    <div class="vocab-box">
+        <p class="word-target" id="wordTarget">你好</p>
+        <p class="word-pinyin" id="wordPinyin">nǐ hǎo</p>
+        <p class="word-meaning" id="wordMeaning">Xin chào</p>
+        
+        <button class="btn-audio" onclick="playStandardAudio()">🔊 Nghe phát âm mẫu</button>
+        
+        <div class="nav-buttons">
+            <button id="btnPrev" onclick="changeWord(-1)">◀ Từ trước</button>
+            <button id="btnNext" onclick="changeWord(1)">Từ sau ▶</button>
+        </div>
+    </div>
+
+    <button id="btnMic" class="btn-mic" onclick="toggleRecognition()">🎤 Nhấn để đọc</button>
+
+    <div id="resultBox" class="result-box">
+        <div class="score" id="scoreText">0%</div>
+        <div class="transcript" id="transcriptText">Hệ thống nghe được: ...</div>
+    </div>
+</div>
+
+<script>
+    // Danh sách từ vựng tiếng Trung giao tiếp đơn giản kèm Pinyin
+    const chineseVocab = [
+        { word: "你好", pinyin: "nǐ hǎo", meaning: "Xin chào" },
+        { word: "谢谢", pinyin: "xièxie", meaning: "Cảm ơn" },
+        { word: "再见", pinyin: "zàijiàn", meaning: "Tạm biệt" },
+        { word: "老师", pinyin: "lǎoshī", meaning: "Thầy cô giáo" },
+        { word: "学生", pinyin: "xuésheng", meaning: "Học sinh" },
+        { word: "中国", pinyin: "Zhōngguó", meaning: "Trung Quốc" },
+        { word: "喜欢", pinyin: "xǐhuan", meaning: "Thích" },
+        { word: "喝水", pinyin: "hē shuǐ", meaning: "Uống nước" },
+        { word: "吃饭", pinyin: "chī fàn", meaning: "Ăn cơm" },
+        { word: "高兴", pinyin: "gāoxìng", meaning: "Vui vẻ" }
+    ];
+
+    let currentIndex = 0;
+    let recognition;
+    let isRecording = false;
+
+    // Khởi tạo hiển thị từ đầu tiên
+    updateWordDisplay();
+
+    // Thiết lập Web Speech API nhận diện tiếng Trung
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        
+        // Đặt ngôn ngữ là Tiếng Trung Phổ Thông Đại Lục (zh-CN)
+        recognition.lang = 'zh-CN'; 
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.onstart = () => {
+            isRecording = true;
+            const btnMic = document.getElementById('btnMic');
+            btnMic.textContent = "🛑 Đang lắng nghe... Hãy nói!";
+            btnMic.classList.add('recording');
+            document.getElementById('resultBox').style.display = 'none';
+        };
+
+        recognition.onresult = (event) => {
+            const resultText = event.results[0][0].transcript;
+            const confidence = event.results[0][0].confidence; // Độ chính xác ước tính từ Google
+            
+            evaluatePronunciation(resultText, confidence);
+        };
+
+        recognition.onend = () => {
+            isRecording = false;
+            const btnMic = document.getElementById('btnMic');
+            btnMic.textContent = "🎤 Nhấn để đọc";
+            btnMic.classList.remove('recording');
+        };
+
+        recognition.onerror = (event) => {
+            console.error(event.error);
+            alert("Lỗi nhận diện. Bạn hãy chắc chắn đã cấp quyền Micro cho trình duyệt nhé!");
+        };
+    } else {
+        alert("Trình duyệt này không hỗ trợ Web Speech API. Vui lòng chạy ứng dụng trên Google Chrome.");
+    }
+
+    // Hàm cập nhật từ vựng lên giao diện
+    function updateWordDisplay() {
+        document.getElementById('wordTarget').textContent = chineseVocab[currentIndex].word;
+        document.getElementById('wordPinyin').textContent = chineseVocab[currentIndex].pinyin;
+        document.getElementById('wordMeaning').textContent = chineseVocab[currentIndex].meaning;
+        document.getElementById('resultBox').style.display = 'none';
+        
+        document.getElementById('btnPrev').disabled = currentIndex === 0;
+        document.getElementById('btnNext').disabled = currentIndex === chineseVocab.length - 1;
+    }
+
+    function changeWord(direction) {
+        currentIndex += direction;
+        if (currentIndex >= 0 && currentIndex < chineseVocab.length) {
+            updateWordDisplay();
+        }
+    }
+
+    // Hàm đọc mẫu (Sử dụng Text-to-Speech giọng zh-CN)
+    function playStandardAudio() {
+        const targetWord = chineseVocab[currentIndex].word;
+        const utterance = new SpeechSynthesisUtterance(targetWord);
+        utterance.lang = 'zh-CN'; 
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function toggleRecognition() {
+        if (isRecording) {
+            recognition.stop();
+        } else {
+            recognition.start();
+        }
+    }
+
+    // Thuật toán so sánh chữ Hán và chấm điểm
+    function evaluatePronunciation(spokenText, googleConfidence) {
+        // Loại bỏ dấu câu nếu có để so sánh chính xác chữ Hán
+        const targetWord = chineseVocab[currentIndex].word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()？。，！]/g,"").trim();
+        const processedSpoken = spokenText.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()？。，！]/g,"").trim();
+
+        const resultBox = document.getElementById('resultBox');
+        const scoreText = document.getElementById('scoreText');
+        const transcriptText = document.getElementById('transcriptText');
+
+        transcriptText.textContent = `Bạn đã đọc: "${spokenText}"`;
+        resultBox.style.display = 'block';
+
+        // 1. Nếu khớp chính xác chữ Hán mục tiêu
+        if (processedSpoken === targetWord) {
+            let finalScore = Math.round(googleConfidence * 100);
+            if (finalScore < 85) finalScore = 90; // Bù điểm sàn cho học sinh khi nhận diện đúng từ
+
+            scoreText.textContent = `太棒/Tuyệt vời! ${finalScore}%`;
+            resultBox.className = "result-box success";
+        } 
+        // 2. Nếu trong câu học sinh đọc có chứa từ mục tiêu
+        else if (processedSpoken.includes(targetWord)) {
+            scoreText.textContent = `很好/Rất tốt! 75%`;
+            resultBox.className = "result-box warning";
+        } 
+        // 3. Nếu hệ thống nhận diện ra từ hoàn toàn khác (sai âm hoặc sai thanh điệu)
+        else {
+            scoreText.textContent = `不对/Chưa đúng! 30%`;
+            resultBox.className = "result-box danger";
+        }
+    }
+</script>
+
+</body>
+</html>
